@@ -1,0 +1,99 @@
+{
+  "name": "commit-message-generator",
+  "displayName": "Commit Message Generator",
+  "description": "Automatically generate commit messages based on code changes",
+  "version": "0.0.1",
+  "publisher": "your-publisher-name",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/commit-message-generator.git"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:commitMessageGenerator.generateMessage",
+    "onCommand:commitMessageGenerator.generateMessageFromChanges"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "commitMessageGenerator.generateMessage",
+        "title": "Generate Commit Message",
+        "category": "Commit Message Generator"
+      },
+      {
+        "command": "commitMessageGenerator.generateMessageFromChanges",
+        "title": "Generate Commit Message from Changes",
+        "category": "Commit Message Generator"
+      }
+    ],
+    "menus": {
+      "scm/title": [
+        {
+          "command": "commitMessageGenerator.generateMessageFromChanges",
+          "group": "navigation",
+          "when": "scmProvider == git"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "commitMessageGenerator.generateMessage",
+          "when": "true"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Commit Message Generator",
+      "properties": {
+        "commitMessageGenerator.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API key for intelligent commit message generation",
+          "scope": "machine"
+        },
+        "commitMessageGenerator.useAI": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use AI for commit message generation when API key is available"
+        },
+        "commitMessageGenerator.commitFormat": {
+          "type": "string",
+          "enum": [
+            "conventional",
+            "simple",
+            "detailed"
+          ],
+          "default": "conventional",
+          "description": "Format style for generated commit messages"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "@vscode/vsce": "^2.32.0",
+    "eslint": "^8.26.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}
