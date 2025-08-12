@@ -3,10 +3,10 @@
   "displayName": "Commit Message Generator",
   "description": "Automatically generate commit messages based on code changes",
   "version": "0.0.1",
-  "publisher": "your-publisher-name",
+  "publisher": "Mugisha Arsene",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/commit-message-generator.git"
+    "url": "https://github.com/wenger-dev/commit-message-generator.git"
   },
   "engines": {
     "vscode": "^1.74.0"
